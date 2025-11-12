@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR Construction Pty Ltd - Building Excellence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header/Navigation */
+        header {
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #c17a3a;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c17a3a;
+        }
+
+        .cta-btn {
+            background: #c17a3a;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            background: #a0632e;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%238B6F47" width="1200" height="600"/><path fill="%23A0826B" d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 8rem 5% 6rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s 0.2s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s 0.4s backwards;
+        }
+
+        .btn-primary {
+            background: #c17a3a;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #a0632e;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #333;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 5%;
+            background: #f5f5f5;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: #c17a3a;
+        }
+
+        /* Portfolio Gallery */
+        .portfolio {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 2rem auto 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            aspect-ratio: 4/3;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 1200px;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: all 0.3s;
+            z-index: 2001;
+        }
+
+        .lightbox-close:hover {
+            background: #c17a3a;
+            border-color: #c17a3a;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-caption {
+            margin-top: 2rem;
+            color: white;
+            text-align: center;
+            max-width: 600px;
+            background: rgba(0,0,0,0.7);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .lightbox-caption h4 {
+            color: #c17a3a;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .lightbox-caption p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-content img {
+                max-height: 60vh;
+            }
+            
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 2rem;
+            }
+            
+            .lightbox-caption {
+                margin-top: 1rem;
+                padding: 1rem;
+            }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            font-size: 3rem;
+        }
+
+        .gallery-placeholder span {
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-caption h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: #c17a3a;
+        }
+
+        .gallery-caption p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .why-us-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .why-us-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .why-us-text p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #c17a3a;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .contact-form-section {
+            background: #c17a3a;
+            padding: 3rem;
+            border-radius: 10px;
+        }
+
+        .contact-form-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background: #333;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #000;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #c17a3a;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #c17a3a;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .why-us-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MS Construction Solutions (Pty) Ltd</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Our Work</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="cta-btn">Get a Quote</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>We're Only One Call Away</h1>
+        <p>20+ years of expertise in woodworking and construction - Quality work you can trust</p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn-primary">Start Your Project</a>
+            <a href="#services" class="btn-secondary">View Our Work</a>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <h2 class="section-title">Our Specialized Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🪵</div>
+                <h3>Custom Cabinetry</h3>
+                <p>Bespoke cabinetry crafted to perfection with premium materials and attention to detail.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏛️</div>
+                <h3>Antique Restorations</h3>
+                <p>Expert restoration of antique furniture and woodwork, preserving history with modern techniques.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🪜</div>
+                <h3>Decking Solutions</h3>
+                <p>Beautiful, durable outdoor decking that enhances your living space and withstands the elements.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Roofing Services</h3>
+                <p>Professional roofing installation and repairs to protect your home for years to come.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔨</div>
+                <h3>Nutec Building</h3>
+                <p>Modern nutec construction solutions for durable, low-maintenance structures.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚒️</div>
+                <h3>And Much More</h3>
+                <p>From renovations to custom projects - we bring your vision to life with quality craftsmanship.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <h2 class="section-title">View Our Work</h2>
+        <p style="text-align: center; margin-bottom: 2rem; color: #666;">Browse through our completed projects showcasing quality craftsmanship</p>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/k9Fcsyq.jpg', 'Custom Bar & Wine Cabinet', 'Handcrafted wooden bar with glass display cabinets, wine glass racks, and diamond wine storage')">
+                <img src="https://i.imgur.com/k9Fcsyq.jpg" alt="Custom Bar & Wine Cabinet">
+                <div class="gallery-caption">
+                    <h4>Custom Bar & Wine Cabinet</h4>
+                    <p>Handcrafted wooden bar with glass display cabinets, wine glass racks, and diamond wine storage</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/xS99RoY.jpg', 'Modern Kitchen Installation', 'Sleek black kitchen with island and modern cabinetry')">
+                <img src="https://i.imgur.com/xS99RoY.jpg" alt="Modern Kitchen Installation">
+                <div class="gallery-caption">
+                    <h4>Modern Kitchen Installation</h4>
+                    <p>Sleek black kitchen with island and modern cabinetry</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/SJWKLU1.jpg', 'Contemporary White Kitchen', 'Clean modern kitchen with island and basket storage')">
+                <img src="https://i.imgur.com/SJWKLU1.jpg" alt="White Kitchen Design">
+                <div class="gallery-caption">
+                    <h4>Contemporary White Kitchen</h4>
+                    <p>Clean modern kitchen with island and basket storage</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/VuLOtZj.jpg', 'Spacious Kitchen Project', 'Full kitchen installation with extensive cabinetry')">
+                <img src="https://i.imgur.com/VuLOtZj.jpg" alt="Large Kitchen Installation">
+                <div class="gallery-caption">
+                    <h4>Spacious Kitchen Project</h4>
+                    <p>Full kitchen installation with extensive cabinetry</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/ktREL2V.jpg', 'Commercial Interior Fit-out', 'Professional office space with carpet flooring')">
+                <img src="https://i.imgur.com/ktREL2V.jpg" alt="Office Space">
+                <div class="gallery-caption">
+                    <h4>Commercial Interior Fit-out</h4>
+                    <p>Professional office space with carpet flooring</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/fNlYh0Q.jpg', 'Custom Built-in Storage', 'Floor-to-ceiling shelving units for maximum storage')">
+                <img src="https://i.imgur.com/fNlYh0Q.jpg" alt="Built-in Shelving">
+                <div class="gallery-caption">
+                    <h4>Custom Built-in Storage</h4>
+                    <p>Floor-to-ceiling shelving units for maximum storage</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/j60Sqm9.jpg', 'Outdoor Pergola & Decking', 'Custom wooden pergola with integrated deck structure')">
+                <img src="https://i.imgur.com/j60Sqm9.jpg" alt="Outdoor Deck Structure">
+                <div class="gallery-caption">
+                    <h4>Outdoor Pergola & Decking</h4>
+                    <p>Custom wooden pergola with integrated deck structure</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/Xo9LpwE.jpg', 'Two-Tone Kitchen Design', 'Modern kitchen with wooden and white cabinetry')">
+                <img src="https://i.imgur.com/Xo9LpwE.jpg" alt="Modern Kitchen">
+                <div class="gallery-caption">
+                    <h4>Two-Tone Kitchen Design</h4>
+                    <p>Modern kitchen with wooden and white cabinetry</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/137mWj3.jpg', 'Wooden Deck with Stairs', 'Custom outdoor deck featuring integrated staircase')">
+                <img src="https://i.imgur.com/137mWj3.jpg" alt="Deck with Stairs">
+                <div class="gallery-caption">
+                    <h4>Wooden Deck with Stairs</h4>
+                    <p>Custom outdoor deck featuring integrated staircase</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/wx0zjGz.jpg', 'Hardwood Pool Decking', 'Beautiful pool deck with premium wood finish')">
+                <img src="https://i.imgur.com/wx0zjGz.jpg" alt="Pool Deck">
+                <div class="gallery-caption">
+                    <h4>Hardwood Pool Decking</h4>
+                    <p>Beautiful pool deck with premium wood finish</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/QSZI3LB.jpg', 'Rustic Wooden Bar', 'Custom-built entertainment bar with reclaimed wood')">
+                <img src="https://i.imgur.com/QSZI3LB.jpg" alt="Rustic Bar">
+                <div class="gallery-caption">
+                    <h4>Rustic Wooden Bar</h4>
+                    <p>Custom-built entertainment bar with reclaimed wood</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/pc3Qu23.jpg', 'Modern Grey Kitchen', 'Sleek grey cabinetry with integrated appliances')">
+                <img src="https://i.imgur.com/pc3Qu23.jpg" alt="Grey Kitchen">
+                <div class="gallery-caption">
+                    <h4>Modern Grey Kitchen</h4>
+                    <p>Sleek grey cabinetry with integrated appliances</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/F9xj2xN.jpg', 'Pool Deck Installation', 'In-progress pool deck construction with precision framing')">
+                <img src="https://i.imgur.com/F9xj2xN.jpg" alt="Pool Deck Construction">
+                <div class="gallery-caption">
+                    <h4>Pool Deck Installation</h4>
+                    <p>In-progress pool deck construction with precision framing</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/nfntISN.jpg', 'Contemporary Black Kitchen', 'High-gloss black cabinetry with modern fixtures')">
+                <img src="https://i.imgur.com/nfntISN.jpg" alt="Modern Black Kitchen">
+                <div class="gallery-caption">
+                    <h4>Contemporary Black Kitchen</h4>
+                    <p>High-gloss black cabinetry with modern fixtures</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/vOGk6gf.jpg', 'Kitchen Renovation Work', 'Custom cabinetry installation in progress')">
+                <img src="https://i.imgur.com/vOGk6gf.jpg" alt="Kitchen Renovation">
+                <div class="gallery-caption">
+                    <h4>Kitchen Renovation Work</h4>
+                    <p>Custom cabinetry installation in progress</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/JGEpaZf.jpg', 'Pool Deck Build', 'Custom decking construction around pool area')">
+                <img src="https://i.imgur.com/JGEpaZf.jpg" alt="Pool Deck Progress">
+                <div class="gallery-caption">
+                    <h4>Pool Deck Build</h4>
+                    <p>Custom decking construction around pool area</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/gpSvUIU.jpg', 'Compact Kitchen Solution', 'Space-efficient kitchen with brick feature wall')">
+                <img src="https://i.imgur.com/gpSvUIU.jpg" alt="Small Kitchen">
+                <div class="gallery-caption">
+                    <h4>Compact Kitchen Solution</h4>
+                    <p>Space-efficient kitchen with brick feature wall</p>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://i.imgur.com/XH2az1i.jpg', 'Roofing Installation', 'Professional roofing work on nutec structure')">
+                <img src="https://i.imgur.com/XH2az1i.jpg" alt="Roofing Work">
+                <div class="gallery-caption">
+                    <h4>Roofing Installation</h4>
+                    <p>Professional roofing work on nutec structure</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption">
+                <h4 id="lightbox-title"></h4>
+                <p id="lightbox-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <section class="why-us" id="about">
+        <div class="why-us-content">
+            <div class="why-us-text">
+                <h2>The MS Construction Difference: Where Quality Work Matters</h2>
+                <p>With over 20 years of experience in the woodworking industry, we bring unmatched expertise, precision, and dedication to every project. Our commitment to quality means your project is completed to the highest standards, on time, and with exceptional attention to detail.</p>
+                <ul class="feature-list">
+                    <li>20+ years in the woodworking industry</li>
+                    <li>Specialized in custom cabinetry and antique restoration</li>
+                    <li>Quality craftsmanship and materials</li>
+                    <li>Professional and reliable service</li>
+                    <li>We're only one call away</li>
+                </ul>
+            </div>
+            <div class="contact-form-section" id="contact">
+                <h3>Ready to Start Your Project?</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Phone Number (e.g., 073 072 5949)" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Request a Quote via WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MS Construction Solutions (Pty) Ltd</h3>
+                <p>Quality woodworking and construction since 2004</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p>Services<br>Our Work<br>About Us<br>Contact</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📱 073 072 5949<br>📱 064 839 7201<br>💬 WhatsApp Available</p>
+            </div>
+        </div>
+        <div class="social-links">
+            <a href="#">📘</a>
+            <a href="#">📷</a>
+            <a href="#">🔗</a>
+        </div>
+        <p style="margin-top: 2rem; border-top: 1px solid #555; padding-top: 1rem;">© 2024 MS Construction Solutions (Pty) Ltd. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Lightbox functions
+        function openLightbox(imgSrc, title, desc) {
+            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-title').textContent = title;
+            document.getElementById('lightbox-desc').textContent = desc;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Form submission with WhatsApp redirect
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = e.target[0].value;
+            const email = e.target[1].value;
+            const phone = e.target[2].value;
+            const message = e.target[3].value;
+            
+            const whatsappMessage = \`Hi! I'm \${name}%0A%0AEmail: \${email}%0APhone: \${phone}%0A%0AMessage: \${message}\`;
+            const whatsappUrl = \`https://wa.me/27730725949?text=\${whatsappMessage}\`;
+            
+            window.open(whatsappUrl, '_blank');
+            e.target.reset();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
